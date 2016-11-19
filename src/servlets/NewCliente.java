@@ -48,7 +48,7 @@ public class NewCliente extends HttpServlet {
 		ClienteDao dao = new ClienteDao();
 		dao.addCliente(cliente);
 		
-		response.sendRedirect("listar-clientes.jap");
+		response.sendRedirect("list.jsp");
 		
 	}
 

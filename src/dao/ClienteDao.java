@@ -35,7 +35,7 @@ public class ClienteDao {
 		List<Cliente> clientes = new ArrayList<Cliente>();
 		
 		try {
-			query = em.createQuery("from cliente");
+			query = em.createQuery("from Cliente");
 			clientes = query.getResultList();
 		} finally {
 			em.close();
