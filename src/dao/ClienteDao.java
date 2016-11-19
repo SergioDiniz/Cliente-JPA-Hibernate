@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -31,16 +32,37 @@ public class ClienteDao {
 	public List<Cliente> listCliente(){
 		
 		Query query;
+		List<Cliente> clientes = new ArrayList<Cliente>();
 		
 		try {
 			query = em.createQuery("from cliente");
-			List<Cliente> clientes = query.getResultList();
+			clientes = query.getResultList();
 		} finally {
 			em.close();
 		}
 		
 		return clientes;
 		
+	}
+	
+	public void removeCliente(Cliente cliente){
+		try {
+			em.getTransaction().begin();
+			em.remove(em.getReference(Cliente.class, cliente).getId());
+			em.getTransaction().commit();
+		} finally {
+			em.close();
+		}
+	}
+	
+	public void updateCliente(Cliente cliente){
+		try {
+			em.getTransaction().begin();
+			em.merge(cliente);
+			em.getTransaction().commit();
+		} finally {
+			em.close();
+		}
 	}
 	
 }
